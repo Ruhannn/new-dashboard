@@ -1,0 +1,53 @@
+import { FiEye } from "react-icons/fi";
+import {
+  Radar,
+  RadarChart,
+  PolarGrid,
+  Legend,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts";
+import { UsageData } from "../../data";
+
+export const UsageRadar = () => {
+  return (
+    <div className="col-span-4 overflow-hidden border rounded border-stone-300">
+      <div className="p-4">
+        <h3 className="flex items-center gap-1.5 font-medium">
+          <FiEye /> Usage
+        </h3>
+      </div>
+
+      <div className="h-64 px-4">
+        <ResponsiveContainer width="100%" height="100%">
+          <RadarChart cx="50%" cy="50%" outerRadius="80%" data={UsageData}>
+            <PolarGrid />
+            <PolarAngleAxis className="text-xs font-bold" dataKey="feature" />
+            <PolarRadiusAxis angle={30} domain={[0, 150]} />
+            <Radar
+              name="Mobile"
+              dataKey="mobile"
+              stroke="#18181b"
+              fill="#18181b"
+              fillOpacity={0.2}
+            />
+            <Radar
+              name="Desktop"
+              dataKey="desktop"
+              stroke="#1d4ed8"
+              fill="#1d4ed8"
+              fillOpacity={0.2}
+            />
+            <Tooltip
+              wrapperClassName="text-sm rounded"
+              labelClassName="text-xs text-stone-500"
+            />
+            <Legend />
+          </RadarChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  );
+};
